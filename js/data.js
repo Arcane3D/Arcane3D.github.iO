@@ -3572,6 +3572,10 @@ window.PORTFOLIO = {
    41
   ],
   [
+   "Furniture Design",
+   16
+  ],
+  [
    "Interior Design",
    28
   ],
@@ -3582,10 +3586,6 @@ window.PORTFOLIO = {
   [
    "Architecture",
    21
-  ],
-  [
-   "Furniture Design",
-   16
   ],
   [
    "Jewelry Design",
