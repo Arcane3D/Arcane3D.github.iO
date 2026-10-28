@@ -23,8 +23,8 @@ $('#heroStats').innerHTML = stats.map(([n,l])=>`<div class="stat"><b data-count=
 const since = new Date(P.memberSince*1000).getFullYear();
 const current = P.work[0];
 $('#aboutMain').innerHTML = `
-  <div class="about-banner"><img src="${P.banner}" alt="Profile banner from Behance" loading="lazy"></div>
-  <div class="about-id"><img src="${P.avatar}" alt="${esc(P.name)}"><div><h3>${esc(P.name)}</h3><p>@${esc(P.username)} · ${esc(P.location)}</p></div></div>
+  <div class="about-banner"><img src="${P.banner}" alt="Profile banner from Behance" loading="lazy" decoding="async" width="1920" height="336"></div>
+  <div class="about-id"><img src="${P.avatar}" alt="${esc(P.name)}" width="72" height="72" loading="lazy" decoding="async"><div><h3>${esc(P.name)}</h3><p>@${esc(P.username)} · ${esc(P.location)}</p></div></div>
   <p class="bio">${esc(P.occupation.charAt(0).toUpperCase()+P.occupation.slice(1))}${current?` — currently ${esc(current.position)} at ${esc(current.organization)}`:''}. My Behance portfolio spans ${esc(topFields.join(', '))}, built with tools like ${esc(D.tools.slice(0,5).map(t=>t[0]).join(', '))}.</p>
   <div class="facts">
     <div class="fact"><b>${P.projectCount}</b><span>Projects</span></div>

@@ -55,7 +55,7 @@ window.PORTFOLIO = {
     "url": "https://www.fiverr.com/virkabdullah"
    }
   ],
-  "avatar": "assets/avatar.jpg",
+  "avatar": "assets/avatar-144.webp",
   "banner": "assets/banner.jpg"
  },
  "projects": [

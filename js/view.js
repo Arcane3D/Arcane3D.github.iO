@@ -6,6 +6,10 @@ const toggle=$('#viewToggle'), fx=$('#waveFx'), svg=fx.querySelector('svg'), lab
 const reduce=matchMedia('(prefers-reduced-motion:reduce)');
 const PORT=/^(portfolio|about|work|skills|services)$/, SHOPH=/^(shop|shopCats|shopSearch)$/;
 let busy=false;
+/* Three.js scene is only needed by the portfolio view: import it on demand */
+let sceneReq=null;
+function loadScene(){ if(!sceneReq) sceneReq=import('./scene.js').catch(()=>root.classList.add('no-webgl')); }
+
 
 /* shop hero numbers come from the listing data */
 const S=window.SHOP||[];
@@ -39,7 +43,7 @@ function flip(els,dir,out){
 }
 function apply(v,target){
   const tc=document.querySelector('meta[name=theme-color]'); if(tc) tc.content=v==='shop'?'#f5f6fa':'#070814';
-  root.dataset.view=v; sync();
+  root.dataset.view=v; sync(); if(v==='portfolio') setTimeout(loadScene,reduce.matches?0:800); /* after the flip-in, so parsing Three.js never janks the transition */
   document.querySelectorAll(`.v-${v} .reveal,.reveal.v-${v}`).forEach(el=>el.classList.add('in'));
   const t=target&&document.getElementById(target);
   scrollTo({top:t?t.getBoundingClientRect().top+scrollY-80:0,behavior:'instant'});
@@ -98,4 +102,8 @@ function fromURL(){
 }
 addEventListener('popstate',()=>setView(fromURL(),{push:false}));
 addEventListener('hashchange',()=>{ const h=location.hash.slice(1); if(PORT.test(h)||SHOPH.test(h)||!h) setView(fromURL(),{push:false}); });
+/* portfolio opened directly: load the scene once the page is idle; otherwise warm it up when the user reaches for the toggle */
+if(root.dataset.view==='portfolio'){ const go=()=>('requestIdleCallback' in window?requestIdleCallback(loadScene,{timeout:1500}):setTimeout(loadScene,300)); document.readyState==='complete'?go():addEventListener('load',go,{once:true}); }
+const pb=toggle.querySelector('[data-view="portfolio"]'); let warmed=false; const warm=()=>{ if(warmed) return; warmed=true; ['js/vendor/three.module.min.js','js/vendor/RoomEnvironment.js','js/scene.js'].forEach(h=>{ const l=document.createElement('link'); l.rel='modulepreload'; l.href=h; document.head.appendChild(l); }); };
+['pointerenter','focus','touchstart'].forEach(ev=>pb.addEventListener(ev,warm,{once:true,passive:true})); /* download only; executed after the switch */
 })();

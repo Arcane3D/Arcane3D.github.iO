@@ -129,6 +129,7 @@ function init(){
     camera.position.x = mouse.x * 0.4; camera.position.y = mouse.y * 0.3 - scrollK * 1.2;
     camera.lookAt(0, -scrollK * 0.8, 0);
     renderer.render(scene, camera);
+    if (!canvas.classList.contains('ready')) canvas.classList.add('ready');
   }
   function start(){ if (!running) { running = true; clock.getDelta(); frame(); } }
   start();

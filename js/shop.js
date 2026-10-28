@@ -19,7 +19,7 @@ const storeCount = st => st==='All'?S.length:S.filter(p=>p.listings.some(l=>l.st
 const catCounts = {}; S.forEach(p=>catCounts[p.cat]=(catCounts[p.cat]||0)+1);
 const cats = ['All',...Object.keys(catCounts).sort((a,b)=>catCounts[b]-catCounts[a])];
 
-let store='All', cat='All', q='', shown=0;
+let store='All', cat='All', q='', shown=0, first=false;
 const PAGE = matchMedia('(max-width:760px)').matches ? 8 : 12;
 const grid=$('#shopGrid'), more=$('#shopMore');
 $('#shopCount').textContent = S.length;
@@ -39,7 +39,7 @@ function card(p,i){
   const offers = L.map(l=>`<div class="offer">${L.length>1?`<small>${l.store}</small>`:''}<div class="p-row">${priceHTML(l)}</div>
       <a class="btn btn-sm buy" href="${esc(l.url)}" target="_blank" rel="noopener" aria-label="Buy ${esc(p.title)} on ${l.store}">${CART}<span>Buy</span></a></div>`).join('');
   const img = p.img
-    ? `<img src="${esc(p.img)}" alt="${esc(p.title)} — white 3D print render" loading="lazy" decoding="async" width="600" height="600" onload="this.classList.add('loaded')">`
+    ? `<img src="${esc(p.img.replace(/\.webp$/,'-360.webp'))}" srcset="${esc(p.img.replace(/\.webp$/,'-360.webp'))} 360w, ${esc(p.img)} 600w" sizes="(max-width:760px) 42vw, (max-width:1100px) 30vw, 230px" alt="${esc(p.title)} — white 3D print render" ${i<4&&!first?'loading="eager" fetchpriority="low"':'loading="lazy"'} decoding="async" width="600" height="600" onload="this.classList.add('loaded')">`
     : PLACEHOLDER;
   return `<article class="scard glass" style="animation-delay:${(i%PAGE)*40}ms">
     <div class="stage">${img}<span class="floor"></span><div class="badges">${badges}</div>${sale}</div>
@@ -65,5 +65,5 @@ $('#shopCats').addEventListener('click',e=>{const b=e.target.closest('.chip'); i
   $('#shopCats').querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c===b)); cat=b.dataset.c; render(true);});
 let t; $('#shopSearch').addEventListener('input',e=>{clearTimeout(t);t=setTimeout(()=>{q=e.target.value;render(true)},160)});
 more.addEventListener('click',()=>render(false));
-render(true);
+render(true); first=true;
 })();

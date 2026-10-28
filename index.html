@@ -1,17 +1,47 @@
 <!doctype html>
 <html lang="en">
 <head>
-<link rel="preload" as="image" href="assets/hero-shop.webp" media="(min-width:761px)" type="image/webp"><link rel="preload" as="image" href="assets/hero-shop-mobile.webp" media="(max-width:760px)" type="image/webp">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Virk.3D — 3D Printable Models (STL) &amp; 3D Design by Muhammad Abdullah</title>
 <meta name="description" content="Shop 3D printable STL models on Cults3D and Thangs — phone cases, gadgets, planters, 1:12 miniatures and more. Plus the portfolio of Muhammad Abdullah (virkabd) — 3D generalist and CAD engineer from Lahore, Pakistan. Product, industrial, eyewear, jewelry, furniture and architectural 3D design.">
 <meta name="theme-color" content="#070814">
-<link rel="icon" href="assets/avatar.jpg">
+<link rel="icon" href="assets/avatar-64.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link id="gf" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
+<style>/* metric-matched fallbacks so the web-font swap doesn't shift layout */
+@font-face{font-family:"Inter Fallback";src:local("Arial"),local("Helvetica"),local("Liberation Sans");size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%}
+@font-face{font-family:"Space Grotesk Fallback";src:local("Arial"),local("Helvetica"),local("Liberation Sans");size-adjust:104%;ascent-override:94%;descent-override:28%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="css/style.css">
+<style>/* loading screen (critical, inline) */
+#loader{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:radial-gradient(900px 600px at 80% -10%,#ece8ff 0,transparent 60%),radial-gradient(700px 600px at 0 60%,#e3f6fb 0,transparent 60%),linear-gradient(180deg,#fbfbfe,#eef0f6);transition:opacity .45s ease,visibility 0s linear .45s}
+html[data-view=portfolio] #loader{background:radial-gradient(900px 600px at 80% -10%,#1a1450 0,transparent 60%),linear-gradient(180deg,#070814,#0c0f24)}
+.ld-card{display:flex;flex-direction:column;align-items:center;gap:14px;padding:26px 34px 22px;border-radius:26px;background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(255,255,255,.55));border:1px solid #fff;box-shadow:0 24px 60px -28px rgba(38,44,96,.4),0 0 0 1px rgba(30,36,80,.06),inset 0 1px 0 #fff;font:600 15px/1 'Space Grotesk',system-ui,-apple-system,sans-serif;letter-spacing:.02em;color:#1d1647;animation:ldIn .35s ease .12s both}
+html[data-view=portfolio] .ld-card{background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03));border-color:rgba(255,255,255,.16);box-shadow:0 24px 60px -28px #000,inset 0 1px 0 rgba(255,255,255,.15);color:#eef0ff}
+.ld-card b{color:#0b84a5}
+.ld-ring{width:52px;height:52px;animation:ldSpin 1s linear infinite}
+.ld-ring circle{fill:none;stroke-width:4.5;stroke-linecap:round}
+.ld-ring .t{stroke:rgba(30,36,80,.1)}html[data-view=portfolio] .ld-ring .t{stroke:rgba(255,255,255,.12)}
+.ld-ring .a{stroke:url(#ldg);stroke-dasharray:60 200;animation:ldDash 1.4s ease-in-out infinite}
+@keyframes ldSpin{to{transform:rotate(360deg)}}@keyframes ldDash{0%,100%{stroke-dasharray:28 200}50%{stroke-dasharray:86 200}}
+@keyframes ldIn{from{opacity:0;transform:scale(.96)}}
+#loader .sr-only,.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html.loaded #loader{opacity:0;visibility:hidden;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.ld-ring,.ld-ring .a,.ld-card{animation:none!important}.ld-ring .a{stroke-dasharray:70 200}#loader{transition-duration:.15s}}
+</style>
+<script>/* hide the loader once fonts + hero + first product row are ready; hard cap 2.5s */
+(function(){var d=document.documentElement,done=0;function hide(){if(done)return;done=1;d.classList.add('loaded');setTimeout(function(){var l=document.getElementById('loader');l&&l.parentNode.removeChild(l)},800)}
+setTimeout(hide,2500);
+function wait(im){return im.complete?Promise.resolve():new Promise(function(r){im.addEventListener('load',r,{once:true});im.addEventListener('error',r,{once:true})})}
+document.addEventListener('DOMContentLoaded',function(){var w=[],shop=d.dataset.view==='shop';
+ var gf=document.getElementById('gf');
+ if(document.fonts&&gf)w.push(new Promise(function(r){if(gf.rel==='stylesheet'&&gf.sheet)r();else gf.addEventListener('load',function(){r()},{once:true});gf.addEventListener('error',function(){r()},{once:true})}).then(function(){return Promise.all([document.fonts.load('700 1em "Space Grotesk"'),document.fonts.load('400 1em Inter')])}));
+ if(shop){var h=document.querySelector('.hero-img img');h&&w.push(wait(h));[].slice.call(document.querySelectorAll('#shopGrid img'),0,4).forEach(function(i){w.push(wait(i))})}
+ Promise.all(w).then(function(){requestAnimationFrame(function(){requestAnimationFrame(hide)})},hide)});
+})();</script>
+
 <script>/* pick view before first paint: shop is default, #portfolio (or a portfolio section hash / ?view=portfolio) opens the portfolio */
 (function(){var h=location.hash.slice(1),q=new URLSearchParams(location.search).get('view');
 document.documentElement.dataset.view=(q==='portfolio'||/^(portfolio|about|work|skills|services)$/.test(h))?'portfolio':'shop';
@@ -19,10 +49,11 @@ var m=document.querySelector('meta[name=theme-color]');if(m)m.content=document.d
 <script type="importmap">{ "imports": { "three": "./js/vendor/three.module.min.js" } }</script>
 </head>
 <body>
+<div id="loader" role="status" aria-live="polite"><div class="ld-card"><svg class="ld-ring" viewBox="0 0 52 52" aria-hidden="true"><defs><linearGradient id="ldg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset=".55" stop-color="#22d3ee"/><stop offset="1" stop-color="#ff5fa2"/></linearGradient></defs><circle class="t" cx="26" cy="26" r="21"/><circle class="a" cx="26" cy="26" r="21"/></svg><span>Virk<b>.</b>3D</span><span class="sr-only">Loading…</span></div></div>
 <div class="bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="grain"></span></div>
 
 <header class="nav glass" id="nav">
-  <a href="#top" class="brand"><img src="assets/avatar.jpg" alt="" width="32" height="32"><span>Virk<b>.</b>3D</span></a>
+  <a href="#top" class="brand"><img src="assets/avatar-64.webp" alt="" width="32" height="32"><span>Virk<b>.</b>3D</span></a>
   <div class="vtoggle" id="viewToggle" role="tablist" aria-label="Switch between shop and portfolio">
     <span class="vt-thumb" aria-hidden="true"><svg class="vt-wave" viewBox="0 0 240 40" preserveAspectRatio="none"><path class="w1" d="M0 22 Q15 14 30 22 T60 22 T90 22 T120 22 T150 22 T180 22 T210 22 T240 22 V40 H0Z"/><path class="w2" d="M0 26 Q15 32 30 26 T60 26 T90 26 T120 26 T150 26 T180 26 T210 26 T240 26 V40 H0Z"/></svg><i class="vt-glare"></i></span>
     <button type="button" role="tab" data-view="shop" aria-selected="true"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 7h16l-1.4 11.2a2 2 0 01-2 1.8H7.4a2 2 0 01-2-1.8L4 7zm4 0a4 4 0 018 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Shop</span></button>
@@ -146,11 +177,11 @@ var m=document.querySelector('meta[name=theme-color]');if(m)m.content=document.d
 
 <footer class="footer"><p>© <span id="year"></span> Muhammad Abdullah · Content &amp; images from <a href="https://www.behance.net/virkabd" target="_blank" rel="noopener">behance.net/virkabd</a></p></footer>
 
-<script src="js/data.js"></script>
-<script src="js/main.js"></script>
-<script src="js/shop-data.js"></script>
-<script src="js/shop.js"></script>
-<script src="js/view.js"></script>
-<script type="module" src="js/scene.js"></script>
+<script defer src="js/shop-data.js"></script>
+<script defer src="js/shop.js"></script>
+<script defer src="js/data.js"></script>
+<script defer src="js/main.js"></script>
+<script defer src="js/view.js"></script>
+<!-- js/scene.js (Three.js) is imported on demand by view.js when the portfolio view is shown -->
 </body>
 </html>
