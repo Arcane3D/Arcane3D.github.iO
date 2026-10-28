@@ -76,7 +76,7 @@ function render(reset){
 }
 $('#filters').addEventListener('click',e=>{
   const b=e.target.closest('.chip'); if(!b) return;
-  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c===b));
+  document.querySelectorAll('#filters .chip').forEach(c=>c.classList.toggle('active',c===b));
   filter=b.dataset.f; render(true);
 });
 let t; $('#search').addEventListener('input',e=>{clearTimeout(t);t=setTimeout(()=>{query=e.target.value;render(true)},160)});

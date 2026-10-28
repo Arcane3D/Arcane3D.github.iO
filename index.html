@@ -19,7 +19,7 @@
 <header class="nav glass" id="nav">
   <a href="#top" class="brand"><img src="assets/avatar.jpg" alt="" width="32" height="32"><span>Virk<b>.</b>3D</span></a>
   <nav class="nav-links" id="navLinks">
-    <a href="#about">About</a><a href="#work">Work</a><a href="#skills">Skills</a><a href="#services">Services</a><a href="#contact">Contact</a>
+    <a href="#about">About</a><a href="#work">Work</a><a href="#skills">Skills</a><a href="#services">Services</a><a href="#shop">Shop</a><a href="#contact">Contact</a>
   </nav>
   <a class="btn btn-sm nav-cta" href="#contact">Hire me</a>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
@@ -85,6 +85,20 @@
     <div class="services" id="serviceList"></div>
   </section>
 
+  <!-- SHOP -->
+  <section class="section" id="shop">
+    <div class="section-head reveal"><p class="kicker">Shop — 3D printable assets</p><h2>Print-ready <span class="grad">models</span> <span class="count" id="shopCount"></span></h2>
+      <p class="muted">STL files I sell on Cults3D and Thangs. Renders show each model as a plain white 3D print; tap Buy to open the listing on the store.</p></div>
+    <div class="toolbar glass reveal shop-toolbar">
+      <div class="filters" id="shopStores" role="tablist" aria-label="Filter by store"></div>
+      <label class="search"><svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="shopSearch" type="search" placeholder="Search models…" aria-label="Search models"></label>
+      <div class="filters shop-cats" id="shopCats" role="tablist" aria-label="Filter by category"></div>
+    </div>
+    <div class="shop-grid" id="shopGrid"></div>
+    <p class="empty muted" id="shopEmpty" hidden>No models match that filter.</p>
+    <div class="more-wrap"><button class="btn btn-ghost" id="shopMore">Load more</button></div>
+  </section>
+
   <!-- CONTACT -->
   <section class="section" id="contact">
     <div class="contact glass reveal">
@@ -102,6 +116,8 @@
 
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
+<script src="js/shop-data.js"></script>
+<script src="js/shop.js"></script>
 <script type="module" src="js/scene.js"></script>
 </body>
 </html>
