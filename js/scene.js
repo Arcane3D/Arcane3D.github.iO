@@ -106,11 +106,13 @@ function init(){
   // Only render while visible
   let visible = true, running = false;
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); }, { threshold: 0 }).observe(hero);
+  // canvas is hidden in the shop view: pause there, resume (and re-measure) when the portfolio shows
+  new MutationObserver(() => { if (document.documentElement.dataset.view !== 'shop') { layout(); start(); } }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-view'] });
   document.addEventListener('visibilitychange', () => { if (!document.hidden) start(); });
 
   const clock = new THREE.Clock();
   function frame(){
-    if (!visible || document.hidden) { running = false; return; }
+    if (!visible || document.hidden || document.documentElement.dataset.view === 'shop') { running = false; return; }
     requestAnimationFrame(frame);
     const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime * (reduce ? 0.15 : 1);
     mouse.lerp(target, 0.06);
